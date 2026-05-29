@@ -1,5 +1,5 @@
 ### EX3 Implementation of GSP Algorithm In Python
-### DATE: 
+
 ### AIM: To implement GSP Algorithm In Python.
 ### Description:
 The Generalized Sequential Pattern (GSP) algorithm is a data mining technique used for discovering frequent patterns within a sequence database. It operates by identifying sequences that frequently occur together. GSP works by employing a depth-first search strategy to explore and extract frequent patterns efficiently.
@@ -36,6 +36,7 @@ for each wear category.</p>
 <p align="justify">
 8. Visulaize the sequence patterns using matplotlib.
 </p>
+
 ### Program:
 
 ```python
@@ -43,16 +44,27 @@ from collections import defaultdict
 from itertools import combinations
 # Function to generate candidate k-item sequences
 def generate_candidates(dataset, k):
+    candidates = defaultdict(int)
+    for sequence in dataset:
+        for combo in combinations(sequence, k):
+            candidates[combo] += 1
+    return candidates
 
 
-    /WRITE YOUR CODE HERE/
 
 
 #Function to perform GSP algorithm
 def gsp(dataset, min_support):
-
-
-  /WRITE YOUR CODE HERE/
+    k = 1
+    frequent_patterns = {}
+    while True:
+        candidates = generate_candidates(dataset, k)
+        frequent_candidates = {pattern: support for pattern, support in candidates.items() if support >= min_support}
+        if not frequent_candidates:
+            break
+        frequent_patterns.update(frequent_candidates)
+        k += 1
+    return frequent_patterns
 
 
 #Example dataset for each category
@@ -102,6 +114,8 @@ else:
  print("No frequent sequential patterns found in Party Wear.")
 ```
 ### Output:
+![image](https://github.com/user-attachments/assets/7fd0ab95-8517-41e4-a113-00747fff655f)
+
 
 ### Visualization:
 ```python
@@ -130,6 +144,10 @@ visualize_patterns_line(bottom_wear_result, 'Bottom Wear')
 visualize_patterns_line(party_wear_result, 'Party Wear')
 ```
 ### Output:
+![image](https://github.com/user-attachments/assets/2a2b2a75-abf1-471d-b872-7072323f8089)
+![image](https://github.com/user-attachments/assets/db93fc8a-143c-4ee0-b23b-d27fe7cd89a1)
+
 
 
 ### Result:
+thus the code excuted sucessfully 
